@@ -1,6 +1,10 @@
 {
     "backendProblem": "Backend Sunucumuza Ulaşılamadı.",
 
+    "loader": {
+        "title": "Yükleniyor...",
+        "desc": "Görünüm Yükleniyor, Lütfen Bekleyiniz."
+    },
     "auth": {
         "register": {
             "301": "Lütfen Email Girin!",
@@ -33,6 +37,16 @@
             "304": "Email Doğrulama Gerekli, Emailinizi Kontrol Edin!",
             "305": "Token Doğrulanamadı!",
             "200": "Başarıyla Giriş Yaptın."
+        },
+        "forgetpassword": {
+            "301": "Lütfen Email/Kullanıcı Adı Girin!",
+            "302": "Captcha Doğrulaması Başarısız!",
+            "200": "İstek Alındı. Bilgiler Doğru İse Mailinizi Kontrol Edin!",
+            "code": {
+                "301": "Lütfen Geçerli Bir Şifre Belirleyin!",
+                "302": "Şifre Yenileme Kod' u Geçersiz.",
+                "200": "Şifre, Başarıyla Güncellendi."
+            }
         }
     },
     "api": {
@@ -132,6 +146,31 @@
             "305": "Yetkisiz İşlem!",
             "306": "Sipariş Bulunamadı!",
             "200": "Başarıyla Sipariş Güncellendi!"
+        },
+        "ticketcreate": {
+            "301": "Kullanıcı Token Bulunamadı",
+            "302": "Başlık Bulunamadı",
+            "303": "Kategori Bulunamadı",
+            "304": "Mesaj Bulunamadı",
+            "305": "Kullanıcı Girişi Geçersiz!",
+            "306": "Lütfen 8-40 Karakter Limitinde Başlık Belirleyin!",
+            "307": "Kategori Geçersiz!",
+            "308": "Lütfen 10-120 Karakter Limitinde Mesaj Belirleyin!",
+            "200": "Başarıyla, Destek Talebi Oluşturuldu!"
+        },
+        "ticketsend": {
+            "301": "Kullanıcı Token Bulunamadı",
+            "302": "Kullanıcı Girişi Geçersiz!",
+            "303": "Destek Talebi Bulunamadı",
+            "304": "Mesaj Bulunamadı",
+            "305": "Lütfen 10-120 Karakter Limitinde Mesaj Belirleyin!",
+            "200": "Başarıyla, Yanıtlandı!"
+        },
+        "ticketsolved": {
+            "301": "Kullanıcı Token Bulunamadı",
+            "302": "Kullanıcı Girişi Geçersiz!",
+            "303": "Destek Talebi Bulunamadı",
+            "200": "Başarıyla, Çözüldü Olarak İşaretlendi!"
         }
     },
     "renders": {
@@ -153,7 +192,8 @@
 
             },
             "google": {
-                "text": "Google İle Kayıt Ol"
+                "text": "Google İle Kayıt Ol",
+                "or": "Veya"
             },
             "verify": {
                 "loading": "Email Doğrulanıyor.."
@@ -171,7 +211,11 @@
             "noacc1": "Hesabım Yok?",
             "noacc2": "Hesap Oluştur",
             "forgetpassword": "Şifremi Unuttum",
-            "button": "Giriş Yap"
+            "button": "Giriş Yap",
+            "google": {
+                "text": "Google İle Giriş Yap",
+                "or": "Veya"
+            }
         },
         "product": {
             "loading": "Yükleniyor Lütfen Bekleyiniz..",
@@ -186,13 +230,35 @@
                 "commission": "Komisyon",
                 "totalprice": "Toplam Ücret",
                 "buy": "Satın Al",
-                "login": "Giriş Yap"
+                "login": "Giriş Yap",
+                "watch": "İzle",
+                "notstock": "Stok Yok"
             },
             "modal": {
                 "title": "Satın Alım",
                 "button": "Satın Al",
                 "problem": "Bilgiler İşlenirken Problem Oluştu",
                 "footer": "Girilen Her Bilgi İşlenecektir, Geri Alınması Mümkün Değildir."
+            },
+            "comments": {
+                "title": "Yorumlar",
+                "content": "Değerli Müşterilerimizin Mağazamız Hakkındaki Değerlendirmeleri"
+            },
+            "faq": {
+                "title": "Sıkça Sorular Sorular",
+                "content": "Sıkça Sorulan Sorular bölümünde aradığınız bilgiye hızlıca erişebilirsiniz.",
+                "questions": {
+                    "1": "Hesap Oluşturmak Ücretli Mi?",
+                    "2": "Ödeme Nasıl Yapabilirim?",
+                    "3": "Güvenlik ve Güvenilirlik Konusunda Ne Söyleyebilirsiniz?",
+                    "4": "Destek Hizmetleriniz Nasıl Çalışıyor?"
+                },
+                "answers": {
+                    "1": "Hayır, hesap oluşturma işlemi tamamen ücretsizdir.",
+                    "2": "Ödeme yapabilmeniz için havale, EFT ve çeşitli online ödeme yöntemleri seçeneklerimiz mevcuttur.",
+                    "3": "2016 yılından bu yana aktif bir şekilde faaliyet gösteren, sektörde tanınan ve popüler bir yazılım alışveriş platformuyuz. Binlerce memnun müşterimiz, kalitemizin ve güvencemizin kanıtıdır.",
+                    "4": "Sitemiz üzerinden panelinize giriş yaparak destek talebinde bulunabilirsiniz. Ayrıca topluluklarımıza katılarak destek ekibimizle doğrudan iletişime geçebilirsiniz."
+                }
             }
         },
         "notfound": {
@@ -229,6 +295,11 @@
             }
         },
         "dashboard": {
+            "notifications": {
+                "name": "Bildirimler",
+                "desc": "Site İçerisindeki Tüm Değişikliklerden Bilgi Edinebilirsiniz!",
+                "pagetitle": "Bildirimler"
+            },
             "settings": {
                 "name": "Ayarlar",
                 "desc": "Ayarlar İle Kolayca Güvenliğinizi Sağlayabilirsiniz!",
@@ -284,6 +355,52 @@
                     "4": "Link Sağlandı!"
                 }
             },
+            "tickets": {
+                "name": "Destek Talebi",
+                "desc": "Destek Talebi Oluştur, Yönet!",
+                "create": "Oluştur",
+                "title": "Başlık",
+                "date": "Tarih",
+                "category": "Kategori",
+                "status": "Durum",
+                "categories": {
+                    "1": "Ödeme Sorunları!",
+                    "2": "İade Sorunları",
+                    "3": "Sipariş Sorunları",
+                    "4": "Diğer Sorunlar"
+                },
+                "statuses": {
+                    "1": "Çözüldü",
+                    "2": "Açık",
+                    "3": "Cevabınız Bekleniyor."
+                }
+            },
+            "ticketcreate": {
+                "name": "Destek Talebi Oluştur",
+                "desc": "Soruların/Sorunların Mı Var? Hemen Bize Bildir!",
+                "form": {
+                    "title": "Destek Başlığı",
+                    "category": "Kategori",
+                    "message": "Sorun Nedir?",
+                    "button": "Oluştur"
+                },
+                "form_problem": "Bilgiler İşlenirken Problem Oluştu",
+                "form_loading":"Bilgiler Kontrol Ediliyor.."
+            },
+            "ticket": {
+                "name": "Destek Talebi",
+                "desc": "Destek Talebi İncele!",
+                "message": "Mesaj",
+                "button_solve": "Çözüldü Olarak İşaretle!",
+                "button_reply": "Yanıtla",
+                "solve": {
+                    "loading": "Çözüldü Olarak İşaretleniyor.."
+                },
+                "send": {
+                    "loading": "Gönderiliyor..",
+                    "form_problem": "Bilgiler İşlenirken Problem Oluştu"
+                }
+            },
             "sidebar": {
                 "home": "Ana Sayfa",
                 "orders": "Siparişlerim",
@@ -294,7 +411,8 @@
                 "settings": "Ayarlar",
                 "admin": "Admin Panel",
                 "quit": "Çıkış Yap",
-                "ticketMessage": "Sol Taraftan Canlı Destek Kullanabilirsiniz!"
+                "ticketMessage": "Sol Taraftan Canlı Destek Kullanabilirsiniz!",
+                "notifications": "Bildirimler"
             },
             "home": {
                 "name": "Panel",
@@ -303,7 +421,7 @@
                 "cards": {
                     "1": "Bakiye",
                     "2": "Harcama",
-                    "3": "Alışveriş"
+                    "3": "Üyeliğin"
                 },
                 "form": {
                     "1": {
@@ -331,7 +449,7 @@
                 "name": "Api",
                 "desc": "Api Otomatik Alışveriş Bağlama Ayrıntıları",
                 "title": "Ufak Bilgiler",
-                "content": "Glycon Altyapısını Kullanarak Api Bağlantısını Yapabilirsiniz. https://api.inelity.com/auto",
+                "content": "SMM Altyapısını Kullanarak Api Bağlantısını Yapabilirsiniz. https://api.inelity.com/smm/v2",
                 "button": "Kopyala",
                 "footer": "Başka Kurulum Ayrıntısı Gerekmez."
             },
@@ -343,6 +461,7 @@
                 "title": "Bakiye Yükle",
                 "form": {
                     "amount": "Miktar",
+                    "type": "Ödeme Yöntemi",
                     "amountPlace": "Miktar Girin..",
                     "usersurname": "Ad Ve Soyad",
                     "usersurnamePlace": "Ad Ve Soyad Girin..",
@@ -356,7 +475,7 @@
         },
         "category": {
             "name": "Kategori",
-            "desc": "Inelity' de Kategorize Ürünleri Keşfet!",
+            "desc": "Inelity' de {{x1}} Kategorize Ürünlerini Keşfet!",
             "loading": "Kategori Yükleniyor..",
             "error": "Kategori Yüklenemedi!",
             "search": {
@@ -368,6 +487,26 @@
             "prev": "Önceki",
             "noCategory": "Kategori Bulunamadı!",
             "sidebar": "Kategoriler"
+        },
+        "forgetpassword": {
+            "name": "Şifremi Unuttum",
+            "desc": "Şifrenizi Mi Unuttunuz? Burası Tam Size Göre!",
+            "title": "Şifremi Unuttum",
+            "form_loading": "Bilgiler Kontrol Ediliyor..",
+            "form_problem": "Bilgiler İşlenirken Problem Oluştu",
+            "form": {
+                "user": "Email Veya Kullanıcı Adı",
+                "button": "E-Mail Gönder"
+            },
+            "reset": {
+                "title": "Yeni Şifre Belirle!",
+                "loading": "Veriler Yükleniyor..",
+                "form": {
+                    "password": "Şifre",
+                    "repassword":"Şifre Tekrar",
+                    "button": "Şifremi Yenile"
+                }
+            }
         }
     },
     "layouts": {
