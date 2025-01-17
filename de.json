@@ -1,0 +1,545 @@
+{
+  "backendProblem": "Unser Backend-Server konnte nicht erreicht werden.",
+  "loader": {
+    "title": "Wird geladen...",
+    "desc": "Die Ansicht wird geladen, bitte warten."
+  },
+  "auth": {
+    "register": {
+      "200": "Sie haben sich erfolgreich registriert (überprüfen Sie Ihre E-Mail)",
+      "301": "Bitte E-Mail eingeben!",
+      "302": "Bitte geben sie einen Benutzernamen ein!",
+      "303": "Bitte Passwort eingeben!",
+      "304": "Bitte geben Sie das Passwort erneut ein!",
+      "305": "Bitte Captcha überprüfen!",
+      "306": "Bitte geben Sie das korrekte Passwort erneut ein!",
+      "307": "E-Mail bereits verwendet!",
+      "308": "Benutzername bereits vergeben!",
+      "309": "Captcha-Verifizierung fehlgeschlagen!",
+      "310": "E-Mail außerhalb zulässiger Domänen versenden!",
+      "311": "Bitte geben Sie den Benutzernamen nur in Kleinbuchstaben ein! ",
+      "312": "Ihr Benutzername muss aus (3-20) Zeichen bestehen!",
+      "313": "Ihr Passwort muss (3-60) Zeichen lang sein!",
+      "314": "E-Mail konnte nicht gesendet werden!"
+    },
+    "verify": {
+      "200": "Ihre E-Mail-Adresse wurde erfolgreich bestätigt, Sie werden weitergeleitet..!",
+      "301": "E-Mail-Bestätigungscode nicht gefunden!",
+      "302": "Der E-Mail-Bestätigungscode ist ungültig!",
+      "303": "Benutzer nicht gefunden!",
+      "304": "Code bereits verwendet!"
+    },
+    "login": {
+      "200": "Sie haben sich erfolgreich angemeldet.",
+      "301": "Bitte E-Mail/Benutzernamen eingeben!",
+      "302": "Bitte Passwort eingeben!",
+      "303": "Die Anmeldeinformationen sind falsch. Versuchen Sie es erneut.",
+      "304": "E-Mail-Bestätigung erforderlich, überprüfen Sie Ihre E-Mail!",
+      "305": "Token konnte nicht verifiziert werden!"
+    },
+    "forgetpassword": {
+      "200": "Anfrage erhalten. ",
+      "301": "Bitte E-Mail/Benutzernamen eingeben!",
+      "302": "Captcha-Verifizierung fehlgeschlagen!",
+      "code": {
+        "200": "Passwort erfolgreich aktualisiert.",
+        "301": "Bitte legen Sie ein gültiges Passwort fest!",
+        "302": "Der Passwort-Reset-Code ist ungültig."
+      }
+    }
+  },
+  "api": {
+    "home": {
+      "301": "Arten nicht gefunden",
+      "302": "Typ konnte nicht ausgewählt werden"
+    },
+    "product": {
+      "301": "SEO-URL nicht eingegeben",
+      "302": "Produkt nicht gefunden!"
+    },
+    "category": {
+      "301": "Kategorie-ID nicht eingegeben"
+    },
+    "buy": {
+      "200": "Sie haben das Produkt erfolgreich gekauft.",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Produkt-ID nicht gefunden",
+      "303": "Benutzeranmeldung ungültig!",
+      "304": "Produkt nicht gefunden!",
+      "305": "Bitte füllen Sie das Kaufformular vollständig und korrekt aus!",
+      "306": "Ihnen fehlt das Gleichgewicht! ",
+      "307": "Produkt nicht vorrätig oder vom Administrator eingestellt!"
+    },
+    "panel": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!"
+    },
+    "settings": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Bitte geben Sie Ihr aktuelles Passwort ein",
+      "303": "Benutzeranmeldung ungültig",
+      "304": "Aktuelles Passwort falsch eingegeben",
+      "305": "Bitte legen Sie ein Passwort mit maximal 3–60 Zeichen fest",
+      "306": "Bitte geben Sie eine gültige Telefonnummer ein!"
+    },
+    "loadLastPayment": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Eingegebene Informationen nicht gefunden!"
+    },
+    "addMoney": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Betrag falsch eingegeben!",
+      "303": "Sie können mindestens 5₺ hochladen!",
+      "304": "Token ungültig!",
+      "305": "Der Zahlungsanbieter hat Ihre Daten abgelehnt!"
+    },
+    "myOrders": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!"
+    },
+    "admin": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Nicht autorisierte Transaktion!"
+    },
+    "adminProducts": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Nicht autorisierte Transaktion!"
+    },
+    "adminOrders": {
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Nicht autorisierte Transaktion!"
+    },
+    "adminCreateProduct": {
+      "200": "Produkt erfolgreich hinzugefügt!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Kein Titel eingegeben!",
+      "303": "Preis nicht eingegeben!",
+      "304": "Kategorie nicht eingetragen!",
+      "305": "Keine Beschreibung eingegeben!",
+      "306": "Kein Foto eingegeben!",
+      "307": "Fragen Problem!",
+      "309": "Benutzeranmeldung ungültig!",
+      "310": "Nicht autorisierte Transaktion!"
+    },
+    "adminEditProduct": {
+      "200": "Produkt erfolgreich aktualisiert!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Kein Titel eingegeben!",
+      "303": "Preis nicht eingegeben!",
+      "304": "Kategorie nicht eingetragen!",
+      "305": "Kein Foto eingegeben!",
+      "307": "Fragen Problem!",
+      "309": "Benutzeranmeldung ungültig!",
+      "310": "Nicht autorisierte Transaktion!",
+      "311": "Produkt nicht gefunden!"
+    },
+    "adminOrderSend": {
+      "200": "Bestellung erfolgreich aktualisiert!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "ID nicht gefunden!",
+      "303": "Status nicht eingegeben!",
+      "304": "Benutzeranmeldung ungültig!",
+      "305": "Nicht autorisierte Transaktion!",
+      "306": "Bestellung nicht gefunden!"
+    },
+    "ticketcreate": {
+      "200": "Erfolgreich, Supportanfrage erstellt!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Titel nicht gefunden",
+      "303": "Kategorie nicht gefunden",
+      "304": "Nachricht nicht gefunden",
+      "305": "Benutzeranmeldung ungültig!",
+      "306": "Bitte legen Sie einen Titel mit maximal 8–40 Zeichen fest!",
+      "307": "Kategorie ungültig!",
+      "308": "Bitte legen Sie ein Nachrichtenlimit von 10-120 Zeichen fest!"
+    },
+    "ticketsend": {
+      "200": "Erfolgreich, beantwortet!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Keine Supportanfrage gefunden",
+      "304": "Nachricht nicht gefunden",
+      "305": "Bitte legen Sie ein Nachrichtenlimit von 10-120 Zeichen fest!"
+    },
+    "ticketsolved": {
+      "200": "Erfolgreich als gelöst markiert!",
+      "301": "Benutzertoken nicht gefunden",
+      "302": "Benutzeranmeldung ungültig!",
+      "303": "Keine Supportanfrage gefunden"
+    }
+  },
+  "renders": {
+    "user": "{{x1}} Produkt"
+  },
+  "pages": {
+    "register": {
+      "name": "Registrieren",
+      "title": "Registrieren",
+      "form_loading": "Angaben werden geprüft.",
+      "form_problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+      "success": "Konto erfolgreich erstellt, überprüfen Sie Ihre E-Mails.",
+      "form": {
+        "email": "Email",
+        "username": "Nutzername",
+        "password": "Passwort",
+        "repassword": "Passwort erneut",
+        "button": "Registrieren"
+      },
+      "google": {
+        "text": "Melden Sie sich bei Google an",
+        "or": "Oder"
+      },
+      "verify": {
+        "loading": "E-Mail-Bestätigung."
+      }
+    },
+    "login": {
+      "loading": "Angaben werden geprüft.",
+      "problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+      "title": "Anmeldung",
+      "email": "Email",
+      "or": "Oder",
+      "username": "Nutzername",
+      "password": "Passwort",
+      "forgetme": "Erinnere dich an mich",
+      "noacc1": "Ich habe keinen Account?",
+      "noacc2": "Benutzerkonto erstellen",
+      "forgetpassword": "Ich habe mein Passwort vergessen",
+      "button": "Anmeldung",
+      "google": {
+        "text": "Anmeldung mit Google",
+        "or": "Oder"
+      }
+    },
+    "product": {
+      "loading": "Laden, bitte warten..",
+      "problem": {
+        "name": "Laden fehlgeschlagen",
+        "desc": "Das Produkt konnte aufgrund eines Schnittstellenproblems nicht installiert werden!"
+      },
+      "render": {
+        "loading": "Das Produkt wird gekauft.",
+        "detail": "Bestelldetails",
+        "price": "Produktpreis",
+        "commission": "Kommission",
+        "totalprice": "Gesamtgebühr",
+        "buy": "Kaufen",
+        "login": "Anmeldung",
+        "watch": "Betrachten",
+        "notstock": "Kein Bestand"
+      },
+      "modal": {
+        "title": "Kaufen",
+        "button": "Kaufen",
+        "problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+        "footer": "Alle eingegebenen Informationen werden verarbeitet, ein Abruf ist nicht möglich."
+      },
+      "comments": {
+        "title": "Kommentare",
+        "content": "Bewertungen unserer geschätzten Kunden über unseren Shop"
+      },
+      "faq": {
+        "title": "Häufig gestellte Fragen",
+        "content": "Im Bereich „Häufig gestellte Fragen“ können Sie schnell auf die gesuchten Informationen zugreifen.",
+        "questions": {
+          "1": "Ist die Erstellung eines Kontos gebührenpflichtig?",
+          "2": "Wie kann ich bezahlen?",
+          "3": "Was können Sie über Sicherheit und Zuverlässigkeit sagen?",
+          "4": "Wie funktionieren Ihre Support-Services?"
+        },
+        "answers": {
+          "1": "Nein, die Erstellung eines Kontos ist völlig kostenlos.",
+          "2": "Für die Bezahlung stehen Ihnen Geldüberweisung, Banküberweisung und verschiedene Online-Zahlungsmethoden zur Verfügung.",
+          "3": "Wir sind eine branchenweit anerkannte und beliebte Software-Shopping-Plattform, die seit 2016 aktiv ist. ",
+          "4": "Sie können Unterstützung anfordern, indem Sie sich über unsere Website in Ihr Panel einloggen. "
+        }
+      }
+    },
+    "notfound": {
+      "name": "Seite nicht gefunden!",
+      "desc": "Leider existiert die gesuchte Seite nicht oder wurde verschoben.",
+      "titlecontent": "Seite nicht gefunden",
+      "content": "Leider existiert die gesuchte Seite nicht oder wurde verschoben.",
+      "back": "Kehren Sie um",
+      "home": "Gehen Sie zur Startseite!"
+    },
+    "home": {
+      "loading": "Laden, bitte warten..",
+      "tabs": {
+        "popular": "Bevorzugt",
+        "highlights": "Höhepunkte",
+        "new": "Neu hinzugefügt"
+      },
+      "layouts": {
+        "ourteam": {
+          "title": "Unser Team",
+          "content": "Unser Team besteht aus leidenschaftlichen und innovativen Fachleuten und gemeinsam realisieren wir Großprojekte."
+        },
+        "preferus": {
+          "title": "Diejenigen, die uns bevorzugen",
+          "content": "Wir bieten unseren Kunden Dienstleistungen an, die Qualität und günstige Preise erzielen möchten. ",
+          "users": "Benutzer",
+          "client": "Kunde"
+        },
+        "userslider": {
+          "title": "Top-Käufer",
+          "content": "Wir bieten unseren Kunden Dienstleistungen an, die Qualität und günstige Preise erzielen möchten. "
+        }
+      }
+    },
+    "dashboard": {
+      "settings": {
+        "name": "Einstellungen",
+        "desc": "Mit den Einstellungen können Sie Ihre Sicherheit ganz einfach gewährleisten!",
+        "loading": "Angaben werden geprüft.",
+        "problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+        "success": "Ihr Konto wurde erfolgreich aktualisiert. ",
+        "pagetitle": "Einstellungen",
+        "formtitle": "Token wird sich ändern!",
+        "form": {
+          "password": "Passwort",
+          "passwordPlace": "Gib dein aktuelles Passwort ein..",
+          "newpassword": "Neues Passwort (optional)",
+          "newpasswordPlace": "Neues Passwort eingeben..",
+          "phone": "Telefon (optional)",
+          "phonePlace": "Geben Sie Telefon ein."
+        },
+        "button": "Aktualisieren"
+      },
+      "reference": {
+        "name": "Referenz",
+        "desc": "Verdienen Sie Guthaben mit unserem Empfehlungssystem!",
+        "titles": {
+          "1": "Wie funktioniert es?",
+          "2": "Plattformen",
+          "3": "Bedingungen",
+          "4": "Auszeichnungen",
+          "5": "Regeln"
+        },
+        "contents": {
+          "1": "Teilen Sie ein Video mit Inelity und teilen Sie uns dies über das Support-System mit. ",
+          "2": "Sie können YouTube nur als Plattform nutzen.",
+          "3": " * 1.000 Abonnenten\n ",
+          "4": " * 100 Aufrufe = 10₺\n ",
+          "5": "Jeder kann einmal profitieren, Sie können die Video-Belohnung einmal erhalten!"
+        }
+      },
+      "myorders": {
+        "name": "Meine Bestellungen",
+        "desc": "Sie können den Status aller Ihrer Bestellungen einsehen und überprüfen.",
+        "loading": "Daten werden geladen..",
+        "pagetitle": "Meine Bestellungen",
+        "table": {
+          "id": "AUSWEIS",
+          "product": "Produkt",
+          "date": "Geschichte",
+          "price": "Preis",
+          "status": "Situation"
+        },
+        "status": {
+          "1": "Wurde geliefert!",
+          "2": "Lieferung wartet..",
+          "3": "Ist zurückgekommen!",
+          "4": "Link bereitgestellt!"
+        }
+      },
+      "tickets": {
+        "name": "Unterstützungsanfrage",
+        "desc": "Supportanfrage erstellen, verwalten!",
+        "create": "Erstellen",
+        "title": "Titel",
+        "date": "Geschichte",
+        "category": "Kategorie",
+        "status": "Situation",
+        "categories": {
+          "1": "Zahlungsprobleme!",
+          "2": "Rückgabeprobleme",
+          "3": "Bestellprobleme",
+          "4": "Andere Probleme"
+        },
+        "statuses": {
+          "1": "gelöst",
+          "2": "Offen",
+          "3": "Ihre Antwort wird erwartet."
+        }
+      },
+      "ticketcreate": {
+        "name": "Erstellen Sie eine Supportanfrage",
+        "desc": "Sie haben Fragen/Probleme? ",
+        "form": {
+          "title": "Stützkopf",
+          "category": "Kategorie",
+          "message": "Was ist das Problem?",
+          "button": "Erstellen"
+        },
+        "form_problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+        "form_loading": "Angaben werden geprüft."
+      },
+      "ticket": {
+        "name": "Unterstützungsanfrage",
+        "desc": "Überprüfen Sie die Supportanfrage!",
+        "message": "Nachricht",
+        "button_solve": "Als gelöst markieren!",
+        "button_reply": "Antwort",
+        "solve": {
+          "loading": "Als gelöst markieren."
+        },
+        "send": {
+          "loading": "Senden..",
+          "form_problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten"
+        }
+      },
+      "sidebar": {
+        "home": "Startseite",
+        "orders": "Meine Bestellungen",
+        "addmoney": "Lastausgleich",
+        "ticket": "Unterstützungsanfrage",
+        "api": "API",
+        "reference": "Referenz",
+        "settings": "Einstellungen",
+        "admin": "Administrationsmenü",
+        "quit": "Ausloggen",
+        "ticketMessage": "Sie können den Live-Support auf der linken Seite nutzen!"
+      },
+      "home": {
+        "name": "Panel",
+        "desc": "Mit dem Kundenverwaltungspanel können Sie ganz einfach verwalten!",
+        "loading": "Daten werden geladen..",
+        "cards": {
+          "1": "Gleichgewicht",
+          "2": "Ausgaben",
+          "3": "Deine Mitgliedschaft"
+        },
+        "form": {
+          "1": {
+            "1": "Produkt",
+            "2": "Geschichte",
+            "3": "Preis"
+          },
+          "2": {
+            "1": "Verfahren",
+            "2": "Geschichte",
+            "3": "Menge"
+          }
+        },
+        "titles": {
+          "1": "Zahlungshistorie",
+          "2": "Balance-Bewegungen"
+        },
+        "status": {
+          "1": "Kaufen",
+          "2": "Wird geladen",
+          "3": "Zurückkehren"
+        }
+      },
+      "api": {
+        "name": "API",
+        "desc": "Details zur automatischen API-Einkaufsbindung",
+        "title": "Wissenswertes",
+        "content": "Sie können eine API-Verbindung mithilfe der SMM-Infrastruktur herstellen. ",
+        "button": "Kopieren",
+        "footer": "Keine weiteren Installationsdetails erforderlich."
+      },
+      "addMoney": {
+        "name": "Lastausgleich",
+        "desc": "Es ist Zeit, Inelity Ihr erstes Guthaben hinzuzufügen!",
+        "loading": "Angaben werden geprüft.",
+        "problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+        "title": "Lastausgleich",
+        "form": {
+          "amount": "Menge",
+          "type": "Bezahlverfahren",
+          "amountPlace": "Geben Sie die Menge ein.",
+          "usersurname": "Name und Nachname",
+          "usersurnamePlace": "Geben Sie Vor- und Nachnamen ein.",
+          "phone": "Telefon",
+          "phonePlace": "Geben Sie Telefon ein.",
+          "address": "Adresse",
+          "addressPlace": "Adresse eingeben..",
+          "button": "Belastung"
+        }
+      }
+    },
+    "category": {
+      "name": "Kategorie",
+      "desc": "In Inelity {{x1}} Entdecken Sie Ihre kategorisierten Produkte!",
+      "loading": "Kategorie wird geladen..",
+      "error": "Kategorie konnte nicht geladen werden!",
+      "search": {
+        "place": "Anruf..",
+        "button": "Suchen"
+      },
+      "noProducts": "Keine Produkte gefunden",
+      "next": "Nächste",
+      "prev": "Ehemalig",
+      "noCategory": "Kategorie nicht gefunden!",
+      "sidebar": "Kategorien"
+    },
+    "forgetpassword": {
+      "name": "Ich habe mein Passwort vergessen",
+      "desc": "Haben Sie Ihr Passwort vergessen? ",
+      "title": "Ich habe mein Passwort vergessen",
+      "form_loading": "Angaben werden geprüft.",
+      "form_problem": "Bei der Verarbeitung der Informationen ist ein Problem aufgetreten",
+      "form": {
+        "user": "E-Mail Adresse oder Benutzername",
+        "button": "E-Mail senden"
+      },
+      "reset": {
+        "title": "Neues Passwort festlegen!",
+        "loading": "Daten werden geladen..",
+        "form": {
+          "password": "Passwort",
+          "repassword": "Passwort erneut",
+          "button": "Setze mein Passwort zurück"
+        }
+      }
+    }
+  },
+  "layouts": {
+    "header": {
+      "home": "Startseite",
+      "discord": {
+        "1": "Server kaufen",
+        "2": "Kaufen Sie Boost",
+        "3": "Mitglied kaufen",
+        "4": "Andere"
+      },
+      "instagram": {
+        "1": "Konto kaufen",
+        "2": "Follower kaufen",
+        "3": "Likes kaufen",
+        "4": "Andere"
+      },
+      "category": "Kategorien",
+      "mobile": {
+        "1": "Software",
+        "2": "Zwietracht",
+        "3": "Instagram",
+        "4": "Kategorien"
+      },
+      "profile": {
+        "1": "Lastausgleich",
+        "2": "Gehen Sie zum Panel",
+        "3": "Einstellungen",
+        "4": "Ausloggen"
+      },
+      "login": "Anmeldung"
+    },
+    "head": {
+      "title": "Startseite",
+      "desc": "Treten Sie uns jetzt bei und werden Sie Teil der Einkaufsumgebung für hochwertige und sichere Produkte!"
+    },
+    "footer": {
+      "text": "Beginnen Sie sofort mit dem sicheren und günstigen Einkaufen in allen Kategorien!",
+      "contact": "Kommunikation",
+      "institutional": "Institutionell",
+      "category": "Kategorien",
+      "shortcut": "Abkürzung"
+    }
+  }
+}
