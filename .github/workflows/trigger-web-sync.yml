@@ -1,0 +1,39 @@
+name: Trigger Web Sync
+
+on:
+  push:
+    branches: ["main"]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  notify_web:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Dispatch web workflow
+        env:
+          WEB_REPO_DISPATCH_TOKEN: ${{ secrets.WEB_REPO_DISPATCH_TOKEN }}
+        run: |
+          set -euo pipefail
+
+          if [ -z "${WEB_REPO_DISPATCH_TOKEN:-}" ]; then
+            echo "Missing required secret: WEB_REPO_DISPATCH_TOKEN" >&2
+            exit 1
+          fi
+
+          curl --fail --silent --show-error \
+            -X POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "Authorization: Bearer ${WEB_REPO_DISPATCH_TOKEN}" \
+            https://api.github.com/repos/inelity/web/dispatches \
+            -d @- <<EOF
+          {
+            "event_type": "languages-updated",
+            "client_payload": {
+              "source_repo": "inelity/languages",
+              "source_sha": "${GITHUB_SHA}"
+            }
+          }
+          EOF
