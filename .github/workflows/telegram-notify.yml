@@ -2,6 +2,7 @@ name: Telegram Notify
 
 on:
   push:
+  workflow_dispatch:
   pull_request:
     types: [opened, reopened, synchronize, closed, ready_for_review]
   issues:
@@ -13,117 +14,166 @@ on:
   create:
   delete:
   workflow_run:
+    workflows: ["Trigger Web Sync"]
     types: [requested, in_progress, completed]
 
 jobs:
   notify:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.name != 'Telegram Notify' }}
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.name != github.workflow }}
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    env:
+      TELEGRAM_BOT_TOKEN: ${{ secrets.TELEGRAM_BOT_TOKEN }}
+      TELEGRAM_CHAT_ID: ${{ secrets.TELEGRAM_CHAT_ID }}
 
     steps:
       - name: Build Telegram message
         id: msg
         shell: bash
         run: |
-          EVENT="${{ github.event_name }}"
-          ACTION="${{ github.event.action }}"
-          REPO="${{ github.repository }}"
-          ACTOR="${{ github.actor }}"
-          URL="https://github.com/${{ github.repository }}"
+          python3 - <<'PY' >> "$GITHUB_OUTPUT"
+          import json
+          import os
 
-          TEXT="📣 Event: $EVENT
-            Repo: $REPO
-            Actor: $ACTOR"
+          event_name = os.environ["GITHUB_EVENT_NAME"]
+          repo = os.environ["GITHUB_REPOSITORY"]
+          actor = os.environ["GITHUB_ACTOR"]
+          action = os.environ.get("EVENT_ACTION", "") or "-"
+          repo_url = f"{os.environ['GITHUB_SERVER_URL']}/{repo}"
+          ref_name = os.environ.get("GITHUB_REF_NAME", "") or "-"
 
-          if [ "$EVENT" = "push" ]; then
-            TEXT="🚀 Push
-            Repo: $REPO
-            Branch: ${{ github.ref_name }}
-            Actor: $ACTOR
-            Commit sayısı: ${{ github.event.commits && github.event.commits.size || 0 }}
-            ${{ github.event.compare }}"
-          fi
+          with open(os.environ["GITHUB_EVENT_PATH"], encoding="utf-8") as fh:
+              payload = json.load(fh)
 
-          if [ "$EVENT" = "pull_request" ]; then
-            TEXT="🔀 Pull Request ($ACTION)
-            Repo: $REPO
-            Title: ${{ github.event.pull_request.title }}
-            Actor: $ACTOR
-            Branch: ${{ github.event.pull_request.head.ref }} -> ${{ github.event.pull_request.base.ref }}
-            ${{ github.event.pull_request.html_url }}"
-          fi
+          def value(item, default="-"):
+              if item in (None, ""):
+                  return default
+              return str(item)
 
-          if [ "$EVENT" = "issues" ]; then
-            TEXT="🐞 Issue ($ACTION)
-            Repo: $REPO
-            Title: ${{ github.event.issue.title }}
-            Actor: $ACTOR
-            ${{ github.event.issue.html_url }}"
-          fi
+          text = "\n".join(
+              [
+                  f"📣 Event: {event_name}",
+                  f"Repo: {repo}",
+                  f"Actor: {actor}",
+                  repo_url,
+              ]
+          )
 
-          if [ "$EVENT" = "issue_comment" ]; then
-            TEXT="💬 Issue Comment ($ACTION)
-            Repo: $REPO
-            Issue: ${{ github.event.issue.title }}
-            Actor: $ACTOR
-            ${{ github.event.comment.html_url }}"
-          fi
+          if event_name == "push":
+              commits = payload.get("commits") or []
+              text = "\n".join(
+                  [
+                      "🚀 Push",
+                      f"Repo: {repo}",
+                      f"Branch: {ref_name}",
+                      f"Actor: {actor}",
+                      f"Commit sayisi: {len(commits)}",
+                      value(payload.get("compare"), repo_url),
+                  ]
+              )
+          elif event_name == "pull_request":
+              pr = payload.get("pull_request") or {}
+              text = "\n".join(
+                  [
+                      f"🔀 Pull Request ({action})",
+                      f"Repo: {repo}",
+                      f"Title: {value(pr.get('title'))}",
+                      f"Actor: {actor}",
+                      f"Branch: {value((pr.get('head') or {}).get('ref'))} -> {value((pr.get('base') or {}).get('ref'))}",
+                      value(pr.get("html_url"), repo_url),
+                  ]
+              )
+          elif event_name == "issues":
+              issue = payload.get("issue") or {}
+              text = "\n".join(
+                  [
+                      f"🐞 Issue ({action})",
+                      f"Repo: {repo}",
+                      f"Title: {value(issue.get('title'))}",
+                      f"Actor: {actor}",
+                      value(issue.get("html_url"), repo_url),
+                  ]
+              )
+          elif event_name == "issue_comment":
+              issue = payload.get("issue") or {}
+              comment = payload.get("comment") or {}
+              text = "\n".join(
+                  [
+                      f"💬 Issue Comment ({action})",
+                      f"Repo: {repo}",
+                      f"Issue: {value(issue.get('title'))}",
+                      f"Actor: {actor}",
+                      value(comment.get("html_url"), repo_url),
+                  ]
+              )
+          elif event_name == "release":
+              release = payload.get("release") or {}
+              text = "\n".join(
+                  [
+                      f"📦 Release ({action})",
+                      f"Repo: {repo}",
+                      f"Tag: {value(release.get('tag_name'))}",
+                      f"Actor: {actor}",
+                      value(release.get("html_url"), repo_url),
+                  ]
+              )
+          elif event_name == "create":
+              text = "\n".join(
+                  [
+                      "🧱 Create",
+                      f"Repo: {repo}",
+                      f"Ref type: {value(payload.get('ref_type'))}",
+                      f"Ref: {value(payload.get('ref'))}",
+                      f"Actor: {actor}",
+                      repo_url,
+                  ]
+              )
+          elif event_name == "delete":
+              text = "\n".join(
+                  [
+                      "🗑 Delete",
+                      f"Repo: {repo}",
+                      f"Ref type: {value(payload.get('ref_type'))}",
+                      f"Ref: {value(payload.get('ref'))}",
+                      f"Actor: {actor}",
+                      repo_url,
+                  ]
+              )
+          elif event_name == "workflow_run":
+              workflow_run = payload.get("workflow_run") or {}
+              workflow_actor = value((workflow_run.get("actor") or {}).get("login"), actor)
+              text = "\n".join(
+                  [
+                      f"⚙️ Workflow Run ({action})",
+                      f"Repo: {repo}",
+                      f"Workflow: {value(workflow_run.get('name'))}",
+                      f"Branch: {value(workflow_run.get('head_branch'))}",
+                      f"Actor: {workflow_actor}",
+                      f"Status: {value(workflow_run.get('status'))}",
+                      f"Conclusion: {value(workflow_run.get('conclusion'))}",
+                      value(workflow_run.get("html_url"), repo_url),
+                  ]
+              )
 
-          if [ "$EVENT" = "release" ]; then
-            TEXT="📦 Release ($ACTION)
-            Repo: $REPO
-            Tag: ${{ github.event.release.tag_name }}
-            Actor: $ACTOR
-            ${{ github.event.release.html_url }}"
-          fi
+          print("text<<EOF")
+          print(text)
+          print("EOF")
+          PY
+        env:
+          EVENT_ACTION: ${{ github.event.action }}
 
-          if [ "$EVENT" = "create" ]; then
-            TEXT="🧱 Create
-            Repo: $REPO
-            Ref type: ${{ github.event.ref_type }}
-            Ref: ${{ github.event.ref }}
-            Actor: $ACTOR
-            $URL"
-          fi
-
-          if [ "$EVENT" = "delete" ]; then
-            TEXT="🗑 Delete
-            Repo: $REPO
-            Ref type: ${{ github.event.ref_type }}
-            Ref: ${{ github.event.ref }}
-            Actor: $ACTOR
-            $URL"
-          fi
-
-          if [ "$EVENT" = "workflow_run" ]; then
-            TEXT="⚙️ Workflow Run ($ACTION)
-            Repo: $REPO
-            Workflow: ${{ github.event.workflow_run.name }}
-            Branch: ${{ github.event.workflow_run.head_branch }}
-            Actor: ${{ github.event.workflow_run.actor.login }}
-            Status: ${{ github.event.workflow_run.status }}
-            Conclusion: ${{ github.event.workflow_run.conclusion }}
-            ${{ github.event.workflow_run.html_url }}"
-          fi
-
-          if [ "$EVENT" = "workflow_job" ]; then
-            TEXT="🧩 Workflow Job ($ACTION)
-            Repo: $REPO
-            Workflow: ${{ github.event.workflow_job.workflow_name }}
-            Job: ${{ github.event.workflow_job.name }}
-            Status: ${{ github.event.workflow_job.status }}
-            Conclusion: ${{ github.event.workflow_job.conclusion }}
-            https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_job.run_id }}"
-          fi
-
-          {
-            echo "text<<EOF"
-            echo "$TEXT"
-            echo "EOF"
-          } >> "$GITHUB_OUTPUT"
+      - name: Skip when Telegram secrets are unavailable
+        if: ${{ env.TELEGRAM_BOT_TOKEN == '' || env.TELEGRAM_CHAT_ID == '' }}
+        run: echo "Telegram secrets are not available for this run. Skipping notification."
 
       - name: Send to Telegram
+        if: ${{ env.TELEGRAM_BOT_TOKEN != '' && env.TELEGRAM_CHAT_ID != '' }}
         run: |
-          curl -sS -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
-            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
-            --data-urlencode text="${{ steps.msg.outputs.text }}"
+          set -euo pipefail
+
+          curl --fail --silent --show-error \
+            -X POST \
+            "https://api.telegram.org/bot${TELEGRAM_BOT_TOKEN}/sendMessage" \
+            --data-urlencode "chat_id=${TELEGRAM_CHAT_ID}" \
+            --data-urlencode "text=${{ steps.msg.outputs.text }}"
