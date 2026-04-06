@@ -14,8 +14,6 @@ on:
   delete:
   workflow_run:
     types: [requested, in_progress, completed]
-  workflow_job:
-    types: [queued, in_progress, completed]
 
 jobs:
   notify:
