@@ -1,0 +1,131 @@
+name: Telegram Notify
+
+on:
+  push:
+  pull_request:
+    types: [opened, reopened, synchronize, closed, ready_for_review]
+  issues:
+    types: [opened, edited, closed, reopened]
+  issue_comment:
+    types: [created, edited]
+  release:
+    types: [published, prereleased, released]
+  create:
+  delete:
+  workflow_run:
+    types: [requested, in_progress, completed]
+  workflow_job:
+    types: [queued, in_progress, completed]
+
+jobs:
+  notify:
+    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.name != 'Telegram Notify' }}
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Build Telegram message
+        id: msg
+        shell: bash
+        run: |
+          EVENT="${{ github.event_name }}"
+          ACTION="${{ github.event.action }}"
+          REPO="${{ github.repository }}"
+          ACTOR="${{ github.actor }}"
+          URL="https://github.com/${{ github.repository }}"
+
+          TEXT="📣 Event: $EVENT
+            Repo: $REPO
+            Actor: $ACTOR"
+
+          if [ "$EVENT" = "push" ]; then
+            TEXT="🚀 Push
+            Repo: $REPO
+            Branch: ${{ github.ref_name }}
+            Actor: $ACTOR
+            Commit sayısı: ${{ github.event.commits && github.event.commits.size || 0 }}
+            ${{ github.event.compare }}"
+          fi
+
+          if [ "$EVENT" = "pull_request" ]; then
+            TEXT="🔀 Pull Request ($ACTION)
+            Repo: $REPO
+            Title: ${{ github.event.pull_request.title }}
+            Actor: $ACTOR
+            Branch: ${{ github.event.pull_request.head.ref }} -> ${{ github.event.pull_request.base.ref }}
+            ${{ github.event.pull_request.html_url }}"
+          fi
+
+          if [ "$EVENT" = "issues" ]; then
+            TEXT="🐞 Issue ($ACTION)
+            Repo: $REPO
+            Title: ${{ github.event.issue.title }}
+            Actor: $ACTOR
+            ${{ github.event.issue.html_url }}"
+          fi
+
+          if [ "$EVENT" = "issue_comment" ]; then
+            TEXT="💬 Issue Comment ($ACTION)
+            Repo: $REPO
+            Issue: ${{ github.event.issue.title }}
+            Actor: $ACTOR
+            ${{ github.event.comment.html_url }}"
+          fi
+
+          if [ "$EVENT" = "release" ]; then
+            TEXT="📦 Release ($ACTION)
+            Repo: $REPO
+            Tag: ${{ github.event.release.tag_name }}
+            Actor: $ACTOR
+            ${{ github.event.release.html_url }}"
+          fi
+
+          if [ "$EVENT" = "create" ]; then
+            TEXT="🧱 Create
+            Repo: $REPO
+            Ref type: ${{ github.event.ref_type }}
+            Ref: ${{ github.event.ref }}
+            Actor: $ACTOR
+            $URL"
+          fi
+
+          if [ "$EVENT" = "delete" ]; then
+            TEXT="🗑 Delete
+            Repo: $REPO
+            Ref type: ${{ github.event.ref_type }}
+            Ref: ${{ github.event.ref }}
+            Actor: $ACTOR
+            $URL"
+          fi
+
+          if [ "$EVENT" = "workflow_run" ]; then
+            TEXT="⚙️ Workflow Run ($ACTION)
+            Repo: $REPO
+            Workflow: ${{ github.event.workflow_run.name }}
+            Branch: ${{ github.event.workflow_run.head_branch }}
+            Actor: ${{ github.event.workflow_run.actor.login }}
+            Status: ${{ github.event.workflow_run.status }}
+            Conclusion: ${{ github.event.workflow_run.conclusion }}
+            ${{ github.event.workflow_run.html_url }}"
+          fi
+
+          if [ "$EVENT" = "workflow_job" ]; then
+            TEXT="🧩 Workflow Job ($ACTION)
+            Repo: $REPO
+            Workflow: ${{ github.event.workflow_job.workflow_name }}
+            Job: ${{ github.event.workflow_job.name }}
+            Status: ${{ github.event.workflow_job.status }}
+            Conclusion: ${{ github.event.workflow_job.conclusion }}
+            https://github.com/${{ github.repository }}/actions/runs/${{ github.event.workflow_job.run_id }}"
+          fi
+
+          {
+            echo "text<<EOF"
+            echo "$TEXT"
+            echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+
+      - name: Send to Telegram
+        run: |
+          curl -sS -X POST "https://api.telegram.org/bot${{ secrets.TELEGRAM_BOT_TOKEN }}/sendMessage" \
+            -d chat_id="${{ secrets.TELEGRAM_CHAT_ID }}" \
+            --data-urlencode text="${{ steps.msg.outputs.text }}"
