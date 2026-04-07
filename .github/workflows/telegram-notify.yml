@@ -15,7 +15,7 @@ on:
   delete:
   workflow_run:
     workflows: ["Trigger Web Sync"]
-    types: [requested, in_progress, completed]
+    types: [in_progress, completed]
 
 jobs:
   notify:
