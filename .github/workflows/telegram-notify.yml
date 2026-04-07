@@ -68,7 +68,7 @@ jobs:
                       f"Repo: {repo}",
                       f"Branch: {ref_name}",
                       f"Actor: {actor}",
-                      f"Commit sayisi: {len(commits)}",
+                      f"Commits: {len(commits)}",
                       value(payload.get("compare"), repo_url),
                   ]
               )
